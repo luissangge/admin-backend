@@ -14,15 +14,11 @@ require('./database');
 
 //Middleware
 app.use( morgan("dev"))
+app.use(express.json())
 
 //Routes
-app.get('/hello', (req, resp) => {
-  
-  resp.status(200).json({
-    ok: true,
-    message: 'Hello word'
-  })
-})
+app.use('/api/users', require('./routes/user.routes'));
+app.use('/api/login', require('./routes/auth.routes'));
 
 
 
