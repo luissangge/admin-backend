@@ -20,4 +20,4 @@ const UserSchema = new Schema(schemaDefinition);
 
 UserSchema.plugin( validator, { message: '{PATH} is required'});
 
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

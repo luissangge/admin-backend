@@ -3,9 +3,14 @@ const User = require('../models/user');
 const userController = {};
 
 
-userController.getAllUsers = async (req, resp) => {
+userController.getAllUsers =  (req, resp) => {
 
-  await User.find({}, 'name email img role')
+  var desde = req.query.desde || 0;
+
+  desde = Number(desde);
+   User.find({}, 'name email img role')
+   .skip(desde)
+   .limit(5)
     .exec((error, users) => {
 
       if (error) {
@@ -15,11 +20,14 @@ userController.getAllUsers = async (req, resp) => {
           errors: error
         })
       }
-
-      resp.status(200).json({
-        ok: true,
-        users
-      })
+      User.count({}, ( err, count) => {
+        resp.status(200).json({
+          ok: true,
+          users,
+          count
+        })
+      })  
+     
     })
 
 
