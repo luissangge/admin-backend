@@ -6,6 +6,7 @@ const loginController = require('../controllers/login.controller');
 
 
 router.post('/', loginController.login);
+router.post('/google', loginController.loginGoogle);
 
 
 
